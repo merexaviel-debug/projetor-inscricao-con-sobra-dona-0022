@@ -185,7 +185,7 @@
  </tr>
  <tr>
  <td colspan="2" bgcolor="#FFFFFF" style="padding:16px 0 8px 0;text-align:center;">
- <a href="/inscricao" data-testid="fazer-inscricao-btn" style="display:inline-block;background-color:#194360;color:#FFFFFF;font-family:'Trebuchet MS',Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;text-decoration:none;padding:10px 28px;border-radius:4px;letter-spacing:.3px;box-shadow:0 1px 2px rgba(0,0,0,.15);transition:background-color .15s ease;" onmouseover="this.style.backgroundColor='#0f2f47'" onmouseout="this.style.backgroundColor='#194360'">Fazer Inscrição</a>
+ <a href="/inscricao.html" data-testid="fazer-inscricao-btn" data-noavisomodal="1" onclick="event.stopPropagation();window.location.href='/inscricao.html';return false;" style="display:inline-block;background-color:#194360;color:#FFFFFF;font-family:'Trebuchet MS',Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;text-decoration:none;padding:10px 28px;border-radius:4px;letter-spacing:.3px;box-shadow:0 1px 2px rgba(0,0,0,.15);transition:background-color .15s ease;" onmouseover="this.style.backgroundColor='#0f2f47'" onmouseout="this.style.backgroundColor='#194360'">Fazer Inscrição</a>
  </td>
  </tr>
  
@@ -552,13 +552,41 @@ e-mail: consulpambsb@gmail.com
     var btn = document.getElementById('aviso-modal-ok');
     var logo = document.getElementById('aviso-modal-logo');
     if(!bd || !btn) return;
-    // logo agora é SVG inline
-    bd.classList.add('show');
-    document.body.style.overflow = 'hidden';
-    function close(){ bd.classList.remove('show'); document.body.style.overflow = ''; }
+    // One-shot per sessão: se usuário já fechou o modal, não reabre de jeito nenhum.
+    var DISMISSED_KEY = '__aviso_modal_dismissed';
+    var wasDismissed = false;
+    try { wasDismissed = sessionStorage.getItem(DISMISSED_KEY) === '1'; } catch(e){}
+    function show(){
+      if (wasDismissed) return;
+      bd.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function close(ev){
+      if (ev && ev.stopPropagation) ev.stopPropagation();
+      if (ev && ev.preventDefault) ev.preventDefault();
+      wasDismissed = true;
+      try { sessionStorage.setItem(DISMISSED_KEY, '1'); } catch(e){}
+      bd.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    // Exceção: cliques em elementos marcados com data-noavisomodal não devem abrir modal.
+    // (defensivo caso algum listener global tente reabrir).
+    document.addEventListener('click', function(ev){
+      var t = ev.target;
+      while (t && t !== document) {
+        if (t.getAttribute && t.getAttribute('data-noavisomodal') === '1') {
+          // permitir ação natural do elemento; garantir modal fechado.
+          if (bd.classList.contains('show')) close();
+          return;
+        }
+        t = t.parentNode;
+      }
+    }, true);
     btn.addEventListener('click', close);
-    bd.addEventListener('click', function(ev){ if(ev.target === bd) close(); });
-    document.addEventListener('keydown', function(ev){ if(ev.key === 'Escape' && bd.classList.contains('show')) close(); });
+    bd.addEventListener('click', function(ev){ if(ev.target === bd) close(ev); });
+    document.addEventListener('keydown', function(ev){ if(ev.key === 'Escape' && bd.classList.contains('show')) close(ev); });
+    // Exibe apenas se ainda não foi dispensado nesta sessão.
+    show();
   });
 })();
 </script>
