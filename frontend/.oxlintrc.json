@@ -1,8 +1,8 @@
 {
   "ignorePatterns": [
     "build/**",
-    "public/farpainel/**",
-    "public/farpapainel/**",
+    "public/donainel/**",
+    "public/donaspainel/**",
     "node_modules/**"
   ],
   "globals": {

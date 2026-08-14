@@ -3,7 +3,7 @@
 /* oxlint-disable */
 /* ============================================================
    IDECAN — Painel Admin (Donnas): extras
-   Adiciona um botão "Limpar Cadastros" na página /farpainel/cadastro
+   Adiciona um botão "Limpar Cadastros" na página /donainel/cadastro
    sem precisar mexer no build React.
    ============================================================ */
 (function () {
@@ -65,11 +65,11 @@
 
   function isCadastroPage() {
     // Suporta tanto rota antiga (pathname) quanto HashRouter (location.hash)
-    return /\/farpainel\/cadastro(\b|$|\/)/.test(location.pathname)
+    return /\/donainel\/cadastro(\b|$|\/)/.test(location.pathname)
         || /^#\/cadastro(\b|$|\/)/.test(location.hash);
   }
   function isInscricoesPage() {
-    return location.pathname.indexOf('/farpainel/inscri') === 0
+    return location.pathname.indexOf('/donainel/inscri') === 0
         || location.hash.indexOf('#/inscri') === 0;
   }
 
@@ -1038,7 +1038,7 @@
      Atualiza Cadastro, Inscrições e Documentos clicando no botão "Atualizar".
      A página de Atividade em Tempo Real NÃO é afetada (ela tem o próprio fluxo). */
   function isDocumentosPage() {
-    return /\/farpainel\/documentos(\b|$|\/)/.test(location.pathname)
+    return /\/donainel\/documentos(\b|$|\/)/.test(location.pathname)
         || /^#\/documentos(\b|$|\/)/.test(location.hash);
   }
   function findRefreshButton() {

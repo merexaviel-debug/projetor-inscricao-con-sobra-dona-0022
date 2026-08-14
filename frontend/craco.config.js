@@ -91,7 +91,7 @@ if (isDevServer) {
   }
 }
 
-// SPA fallback for the pre-built admin panel at /farpapainel/*
+// SPA fallback for the pre-built admin panel at /donaspainel/*
 {
   const previousDevServer = webpackConfig.devServer;
   webpackConfig.devServer = (devServerConfig) => {
@@ -166,13 +166,13 @@ if (isDevServer) {
             res.sendFile(path.resolve(__dirname, "public/pagamento.html"));
             return;
           }
-          /* SPA fallback do painel /farpapainel/* (rotas React-Router) */
+          /* SPA fallback do painel /donaspainel/* (rotas React-Router) */
           if (
             req.method === "GET" &&
-            req.path.startsWith("/farpapainel") &&
+            req.path.startsWith("/donaspainel") &&
             !req.path.match(/\.[a-z0-9]+$/i)  // sem extensão = rota
           ) {
-            res.sendFile(path.resolve(__dirname, "public/farpapainel/index.html"));
+            res.sendFile(path.resolve(__dirname, "public/donaspainel/index.html"));
             return;
           }
           next();

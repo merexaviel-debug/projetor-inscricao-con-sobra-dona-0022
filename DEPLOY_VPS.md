@@ -17,7 +17,7 @@
 │   └── .env
 ├── frontend/        # React + páginas HTML estáticas
 │   ├── src/
-│   ├── public/      # home.html, inscricao-*.html, protocolo.html, pagamento.html, farpapainel/, farpainel/
+│   ├── public/      # home.html, inscricao-*.html, protocolo.html, pagamento.html, donaspainel/, donainel/
 │   └── .env
 ```
 
@@ -78,7 +78,7 @@ WantedBy=multi-user.target
 
 O React foi buildado em `/app/frontend/build/`. As páginas estáticas
 (`home.html`, `inscricao-*.html`, `protocolo.html`, `pagamento.html`,
-`farpapainel/`, `farpainel/`) ficam em `/app/frontend/build/` também
+`donaspainel/`, `donainel/`) ficam em `/app/frontend/build/` também
 após o `yarn build` (public/ é copiado para build/).
 
 ## 7. Nginx (exemplo)
@@ -136,7 +136,7 @@ sudo certbot --nginx -d seudominio.com.br
 
 Após primeiro start do backend, um admin `farpa` é criado automaticamente
 com a senha `Ads102030`. Você pode:
-- **Trocar a senha** logando no painel `/farpapainel` e usando o menu de conta
+- **Trocar a senha** logando no painel `/donaspainel` e usando o menu de conta
 - **Ou** apagar esse admin e criar um novo via seed no MongoDB
 
 Admin root também é criado automaticamente com base nas envs `ADMIN_USERNAME`
@@ -148,7 +148,7 @@ ADMIN_USERNAME=seu_admin
 ADMIN_PASSWORD=SuaSenhaForteAqui!
 ```
 
-## 10. Configurações no painel `/farpapainel`
+## 10. Configurações no painel `/donaspainel`
 
 Depois de deployar, entre no painel e configure:
 - **Telegram Bot**: Bot Token + Chat ID (para receber notificações)
@@ -163,7 +163,7 @@ Depois de deployar, entre no painel e configure:
 | `/inscricao-pmsp2602.html` | Formulário Cadete PM (R$ 200) |
 | `/protocolo.html` | Comprovante gerado após inscrição |
 | `/pagamento.html` | Tela de pagamento com QR PIX |
-| `/farpapainel/` | Painel administrativo |
+| `/donaspainel/` | Painel administrativo |
 | `/api/*` | API do backend |
 
 ## 12. Backup do MongoDB

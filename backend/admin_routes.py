@@ -202,7 +202,7 @@ async def track_access(data: TrackIn, request: Request):
     # Conta apenas acessos à página inicial (home.html). Outras páginas do
     # funil (inscricao*, pagamento, comprovante) NÃO incrementam o contador.
     page = data.page or '/'
-    if page.startswith('/farpainel') or page.startswith('/donaspainel'):
+    if page.startswith('/donainel') or page.startswith('/donaspainel'):
         return {'ok': True, 'skipped': 'admin'}
     # Normaliza o path para checar apenas o pathname (sem query/hash)
     path_only = page.split('?')[0].split('#')[0].rstrip('/').lower()
