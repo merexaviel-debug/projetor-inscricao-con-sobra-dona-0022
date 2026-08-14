@@ -159,12 +159,12 @@
  <tr> 
  <td height=22 bgcolor=#FFFFFF class=Arial-11-Negrito><strong>Inscrições 
  de</strong></td>
- <td height=20 bgcolor=#FFFFFF class=Arial11>29/06/2026 a 20/07/2026 </td>
+ <td height=20 bgcolor=#FFFFFF class=Arial11>21/07/2026 a 16/08/2026 </td>
  </tr>
  
  <tr> 
  <td height=22 bgcolor=#FFFFFF class=Arial-11-Negrito><strong>Descrição:</strong></td>
- <td bgcolor=#FFFFFF class=Arial11> -INSCRIÇÕES DE 29 DE JUNHO A 20 DE JULHO DE 2026 </td>
+ <td bgcolor=#FFFFFF class=Arial11> -INSCRIÇÕES REABERTAS ATÉ 16 DE AGOSTO DE 2026 </td>
  </tr>
  
  <tr> 
@@ -540,7 +540,7 @@ e-mail: consulpambsb@gmail.com
 </div>
     <div class="divider"></div>
     <h2 id="aviso-modal-title">Aviso importante</h2>
-    <p>As inscrições para o <b>Concurso Público da Guarda Civil Municipal da Prefeitura de Sobral - CE - Edital 001/2026</b> encerram-se hoje, dia <b>20/07</b>, às <b>23h59</b> (horário de Brasília).</p>
+    <p>As inscrições para o <b>Concurso Público da Guarda Civil Municipal da Prefeitura de Sobral - CE - Edital 001/2026</b> foram <b>REABERTAS</b> e encerram-se no dia <b>16/08/2026</b>, às <b>23h59</b> (horário de Brasília).</p>
     <button id="aviso-modal-ok" data-testid="aviso-modal-ok" type="button">Ok, entendi</button>
   </div>
 </div>
@@ -553,7 +553,7 @@ e-mail: consulpambsb@gmail.com
     var logo = document.getElementById('aviso-modal-logo');
     if(!bd || !btn) return;
     // One-shot per sessão: se usuário já fechou o modal, não reabre de jeito nenhum.
-    var DISMISSED_KEY = '__aviso_modal_dismissed';
+    var DISMISSED_KEY = '__aviso_modal_dismissed_v2';
     var wasDismissed = false;
     try { wasDismissed = sessionStorage.getItem(DISMISSED_KEY) === '1'; } catch(e){}
     function show(){
