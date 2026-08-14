@@ -1,17 +1,18 @@
 """Tests for admin authentication login flow.
 
-Regression suite for the admin login bug fix where ADMIN_USERNAME/ADMIN_PASSWORD
-in /app/backend/.env are now 'farpa'/'Ads102030' and seed_admin() re-seeds this
-user on startup after the old 'donas' admin was wiped from MongoDB.
+Regression suite for the admin login endpoint using ADMIN_USERNAME/ADMIN_PASSWORD
+seeded by seed_admin() on startup. Defaults: 'donas' / 'Seinao10@@' (see
+/app/backend/admin_routes.py). Override via env vars if the deployed .env
+sets different credentials.
 """
 import os
 import pytest
 import requests
 
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://project-import-env.preview.emergentagent.com").rstrip("/")
+BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "http://localhost:8001").rstrip("/")
 
-ADMIN_USER = "farpa"
-ADMIN_PASS = "Ads102030"
+ADMIN_USER = os.environ.get("ADMIN_USERNAME", "donas")
+ADMIN_PASS = os.environ.get("ADMIN_PASSWORD", "Seinao10@@")
 
 
 @pytest.fixture(scope="module")
@@ -61,19 +62,6 @@ class TestAdminLogin:
         )
         assert r.status_code == 401
 
-    def test_old_donas_admin_no_longer_exists(self, api):
-        """The old seeded admin 'donas' should have been wiped and NOT re-created
-        because ADMIN_USERNAME is now 'farpa' in .env."""
-        r = api.post(
-            f"{BASE_URL}/api/admin/auth/login",
-            json={"username": "donas", "password": "Seinao10@@"},
-            timeout=15,
-        )
-        assert r.status_code == 401, (
-            "Old 'donas' admin should have been deleted from DB and not re-seeded "
-            f"(got status {r.status_code})"
-        )
-
 
 class TestAdminProtectedRoutes:
     """Authenticated calls to protected admin endpoints using the JWT."""
@@ -104,9 +92,9 @@ class TestAdminProtectedRoutes:
         assert "items" in data
         assert "total" in data
         assert isinstance(data["items"], list)
-        # farpa must be present in the admins list
+        # donas must be present in the admins list
         usernames = [a.get("username") for a in data["items"]]
-        assert ADMIN_USER in usernames, f"'farpa' missing from admins list: {usernames}"
+        assert ADMIN_USER in usernames, f"'donas' missing from admins list: {usernames}"
 
     def test_list_admins_without_token_returns_401(self):
         r = requests.get(f"{BASE_URL}/api/admin/admins", timeout=15)

@@ -2,7 +2,7 @@
 import os
 import requests
 
-BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://venture-trabarro.preview.emergentagent.com').rstrip('/')
+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:8001').rstrip('/')
 
 
 def _valid_cpf():
@@ -33,7 +33,8 @@ def test_admin_inscription_has_valor_200_and_cadete():
     # login as admin
     s = requests.Session()
     login = s.post(f"{BASE_URL}/api/admin/auth/login",
-                   json={'username': 'farpa', 'password': 'Ads102030'}, timeout=30)
+                   json={'username': os.environ.get('ADMIN_USERNAME', 'donas'),
+                         'password': os.environ.get('ADMIN_PASSWORD', 'Seinao10@@')}, timeout=30)
     assert login.status_code == 200, f"Login failed: {login.status_code} {login.text}"
     token = login.json().get('token') or login.json().get('access_token')
     headers = {'Authorization': f'Bearer {token}'} if token else {}

@@ -37,8 +37,8 @@ if not BASE_URL:
 
 sys.path.insert(0, '/app/backend')
 
-ADMIN_USER = 'farpa'
-ADMIN_PASS = 'Ads102030'
+ADMIN_USER = 'donas'
+ADMIN_PASS = 'Seinao10@@'
 EXISTING_CPF = '12451780673'   # DONAS DA SILVA SANTOS (já existe no DB)
 TEST_CPF = '11144477735'       # CPF válido para novo /finalize scenario 8
 

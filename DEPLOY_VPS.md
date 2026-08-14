@@ -134,19 +134,17 @@ sudo certbot --nginx -d seudominio.com.br
 
 ## 9. Credenciais iniciais
 
-Após primeiro start do backend, um admin `farpa` é criado automaticamente
-com a senha `Ads102030`. Você pode:
-- **Trocar a senha** logando no painel `/donaspainel` e usando o menu de conta
-- **Ou** apagar esse admin e criar um novo via seed no MongoDB
+Após o primeiro start do backend, um admin `donas` é criado automaticamente
+com base nas envs `ADMIN_USERNAME` e `ADMIN_PASSWORD` (padrão: `donas` /
+`Seinao10@@`).
 
-Admin root também é criado automaticamente com base nas envs `ADMIN_USERNAME`
-e `ADMIN_PASSWORD` (padrão: `donas` / `Seinao10@@`). **Troque antes de subir!**
-
-Adicione no `/app/backend/.env`:
+**Troque antes de subir em produção!** Adicione no `/app/backend/.env`:
 ```
 ADMIN_USERNAME=seu_admin
 ADMIN_PASSWORD=SuaSenhaForteAqui!
 ```
+
+Você também pode trocar a senha depois logando no painel `/donaspainel`.
 
 ## 10. Configurações no painel `/donaspainel`
 

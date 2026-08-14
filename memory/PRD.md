@@ -20,7 +20,7 @@ Português (pt-BR)
 - `/pagamento` — pagamento.html (PIX + QR)
 
 ## Credenciais
-- Admin `/donaspainel`: `farpa` / `Ads102030`
+- Admin `/donaspainel`: `donas` / `Seinao10@@`
 
 ## Implementado
 - **[19/07/2026]** Correção de responsividade mobile: CSS `<style id="mobile-fix">` refinado nos 5 HTMLs. Aplicado em `@media (max-width:768px)` e `(max-width:480px)`. Cobertura: header, menu, tabelas com `width` fixo (500/948), fieldsets, inputs, footer com endereço. Testado em 390x844 (iPhone) — sem scroll horizontal, formulários legíveis, botões full-width.
